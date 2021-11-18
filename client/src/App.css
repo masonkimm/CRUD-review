@@ -33,6 +33,27 @@
 .container button:hover {
   cursor: pointer;
 }
+
+.showEmployees {
+  border: 1px solid red;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 2rem;
+}
+
+.emp__list {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  margin: 1rem;
+  padding: 1rem;
+  border: 1px solid blue;
+  justify-content: center;
+}
+
 .App-logo {
   position: fixed;
   right: 0;

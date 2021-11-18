@@ -11,10 +11,7 @@ function App() {
   const [techStack, setTechStack] = useState('');
   const [salary, setSalary] = useState(0);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(name, age, position, techStack, salary);
-  };
+  const [empList, setEmpList] = useState([]);
 
   const addEmployee = (e) => {
     e.preventDefault();
@@ -29,9 +26,28 @@ function App() {
       })
       .then(() => {
         console.log('Success');
+        setEmpList(
+          [
+            ...empList,
+            {
+              name: name,
+              age: age,
+              position: position,
+              techStack: techStack,
+              salary: salary,
+            },
+          ].reverse()
+        );
       });
   };
 
+  const getEmployees = () => {
+    axios.get('http://localhost:5000/employees').then((response) => {
+      const res = response.data;
+      console.log(res);
+      setEmpList(res.reverse());
+    });
+  };
   return (
     <div className='App'>
       <Header />
@@ -76,6 +92,19 @@ function App() {
           />
           <button type='submit'>Add Employee</button>
         </form>
+      </div>
+      <br />
+      <div className='showEmployees'>
+        <button onClick={getEmployees}>Show Employees</button>
+        {empList.map((employee) => (
+          <div key={employee.id} className='emp__list'>
+            <h3>name: {employee.name} </h3>
+            <p>age: {employee.age}</p>
+            <p>position: {employee.position}</p>
+            <p>tech stack: {employee.techStack}</p>
+            <p>salary: {employee.salary}</p>
+          </div>
+        ))}
       </div>
     </div>
   );

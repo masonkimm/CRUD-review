@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import Header from './components/Header';
 import { useState } from 'react';
+import axios from 'axios';
 
 function App() {
   const [name, setName] = useState('');
@@ -14,12 +15,29 @@ function App() {
     e.preventDefault();
     console.log(name, age, position, techStack, salary);
   };
+
+  const addEmployee = (e) => {
+    e.preventDefault();
+    console.log(name);
+    axios
+      .post('http://localhost:5000/create', {
+        name: name,
+        age: age,
+        position: position,
+        techStack: techStack,
+        salary: salary,
+      })
+      .then(() => {
+        console.log('Success');
+      });
+  };
+
   return (
     <div className='App'>
       <Header />
       <div className='container'>
         <img src={logo} className='App-logo' alt='logo' />
-        <form action='' onSubmit={handleSubmit}>
+        <form onSubmit={addEmployee}>
           <label htmlFor='name'>Name:</label>
           <input
             type='text'

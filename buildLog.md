@@ -7,4 +7,12 @@
 ```
 -mysql
 -express
+-nodemon
+```
+
+### - server > nodemon
+
+```
+scripts: "Dev" : "nodemon index.js"
+> npm run Dev
 ```

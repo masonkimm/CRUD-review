@@ -1,7 +1,38 @@
 .App {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
+.Header {
+  margin: 0 20px;
+  /* border: 1px solid red; */
+  display: flex;
+  align-items: center;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  /* align-items: center; */
+  border: 1px solid black;
+  padding: 1rem;
+}
+.container form {
+  display: flex;
+  flex-direction: column;
+  /* width: 100%; */
+}
+.container input,
+.container button {
+  padding: 5px;
+  font-size: 20px;
+  margin: 10px 0;
+}
+.container button:hover {
+  cursor: pointer;
+}
 .App-logo {
   position: fixed;
   right: 0;

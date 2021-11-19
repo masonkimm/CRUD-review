@@ -30,7 +30,7 @@
   font-size: 20px;
   margin: 10px 0;
 }
-.container button:hover {
+button:hover {
   cursor: pointer;
 }
 
@@ -46,12 +46,30 @@
 
 .emp__list {
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   width: 90%;
   margin: 1rem;
   padding: 1rem;
   border: 1px solid blue;
-  justify-content: center;
+  /* justify-content: center; */
+}
+
+.showInfo__section {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 1rem;
+  margin-left: 4rem;
+}
+.update__section {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 1rem;
+  margin-right: 4rem;
+}
+.update__section input {
+  margin: 14px 0;
 }
 
 .App-logo {

@@ -13,6 +13,9 @@ function App() {
 
   const [empList, setEmpList] = useState([]);
 
+  const [newName, setNewName] = useState('');
+  const [newPosition, setNewPosition] = useState('');
+
   const addEmployee = (e) => {
     e.preventDefault();
     console.log(name);
@@ -46,6 +49,41 @@ function App() {
       const res = response.data;
       console.log(res);
       setEmpList(res.reverse());
+    });
+  };
+  const updateEmployee = (id) => {
+    console.log(id);
+    axios
+      .put('http://localhost:5000/update', {
+        name: newName,
+        position: newPosition,
+        id: id,
+      })
+      .then((resp) => {
+        alert('updated');
+        setEmpList(
+          empList.map((employee) => {
+            return employee.id === id
+              ? {
+                  id: employee.id,
+                  name: newName,
+                  position: newPosition,
+                  salary: employee.salary,
+                  age: employee.age,
+                  techStack: employee.techStack,
+                }
+              : employee;
+          })
+        );
+      });
+  };
+  const deleteEmployee = (id) => {
+    axios.delete(`http://localhost:5000/delete/${id}`).then((res) => {
+      setEmpList(
+        empList.filter((employee) => {
+          return employee.id !== id;
+        })
+      );
     });
   };
   return (
@@ -98,11 +136,45 @@ function App() {
         <button onClick={getEmployees}>Show Employees</button>
         {empList.map((employee) => (
           <div key={employee.id} className='emp__list'>
-            <h3>name: {employee.name} </h3>
-            <p>age: {employee.age}</p>
-            <p>position: {employee.position}</p>
-            <p>tech stack: {employee.techStack}</p>
-            <p>salary: {employee.salary}</p>
+            <div className='showInfo__section'>
+              <h3>name: {employee.name} </h3>
+              <p>age: {employee.age}</p>
+              <p>position: {employee.position}</p>
+              <p>tech stack: {employee.techStack}</p>
+              <p>salary: {employee.salary}</p>
+            </div>
+            <div className='update__section'>
+              <input
+                type='text'
+                placeholder='update employee name'
+                onChange={(e) => {
+                  e.preventDefault();
+                  setNewName(e.target.value);
+                }}
+              />
+              <input type='number' placeholder='update employee age' />
+              <input
+                type='text'
+                placeholder='update employee position'
+                onChange={(e) => {
+                  e.preventDefault();
+                  setNewPosition(e.target.value);
+                }}
+              />
+              <input type='text' placeholder='update employee tech stack' />
+              <input type='number' placeholder='update employee salary' />
+              <button onClick={() => updateEmployee(employee.id)}>
+                Update
+              </button>
+            </div>
+            <div className=''>
+              <button
+                onClick={() => {
+                  deleteEmployee(employee.id);
+                }}>
+                X
+              </button>
+            </div>
           </div>
         ))}
       </div>

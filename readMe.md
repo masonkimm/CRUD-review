@@ -1,6 +1,6 @@
 # CRUD REVIEW
 
-## Tech Used
+## Tech Used: MERN stack
 
 ### - MySQL
 
